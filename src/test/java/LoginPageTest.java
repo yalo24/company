@@ -33,7 +33,7 @@ public class LoginPageTest {
     public void NewsTest(){
 
 
-       /* WebElement News1 = driver.findElement(By.xpath("//*[@id=\"blog-articles\"]/div[1]/a"));
+       WebElement News1 = driver.findElement(By.xpath("//*[@id=\"blog-articles\"]/div[1]/a"));
         News1.click();
         Assert.assertEquals(News1.getText(), "Eating your own dog food");
         WebElement News2 = driver.findElement(By.xpath("//*[@id=\"blog-articles\"]/div[2]/a"));
@@ -47,13 +47,13 @@ public class LoginPageTest {
         Assert.assertEquals(News4.getText(), "Why you must never forget your monkkee password!!");
         WebElement News5 = driver.findElement(By.xpath("//*[@id=\"blog-articles\"]/div[5]/a"));
         News5.click();
-        Assert.assertEquals(News5.getText(), "Why monkkee won’t launch an app in the near future");*/
+        Assert.assertEquals(News5.getText(), "Why monkkee won’t launch an app in the near future");
     }
     @Test
     public void SeachTest() {
         driver.get("https://www.monkkee.com/en/blog/");
         WebElement element1 = driver.findElement(By.xpath("//input[@id=\"s\"]"));
-        element1.sendKeys("Why you must never forget your monkkee password!!");
+        element1.sendKeys("5 ideas how to use coloured tags");
         element1.submit();
 
     }
