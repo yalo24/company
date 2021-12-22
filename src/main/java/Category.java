@@ -1,6 +1,6 @@
 public class Category {
 
-        public int id;
+        public long id;
         public String name;
     }
 

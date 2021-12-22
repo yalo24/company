@@ -41,6 +41,7 @@ public class HomePageTest {
         homePage.find(HomePage.addButton).click();
         waitElement(HomePage.editableArea);
         String testText = UUID.randomUUID().toString();
+        waitElement(By.xpath("//*[@id=\"cke_46\"]/span[1]"));
         homePage.find(HomePage.editableArea).sendKeys(testText);
         homePage.find(HomePage.homeButton).click();
         waitElement(HomePage.itemBodyList);
@@ -56,12 +57,20 @@ public class HomePageTest {
     }
         // найти запись
         @Test
-        public void findMassage () throws InterruptedException {
-            waitElement(HomePage.itemBodyList);
-            homePage.find(HomePage.itemBodyList);
-            String text = "xcvmbbn.,n";
-            List<WebElement> list = driver.findElements(By.xpath("//div[@class='body '][contains(text(),'" + text + "')]"));
-            Assert.assertTrue(list.size() > 0, "text is found");
+        public void SeachTest() throws InterruptedException {
+         //   driver.get("https://www.monkkee.com/en/blog/");
+            Thread.sleep(5000);
+            String text = "a321cbf8-7ac1-45a6-b804-0916195185b1";
+            WebElement element1 = driver.findElement(By.xpath("//*[@id=\"appendedInputButton\"]"));
+            element1.sendKeys(text);
+            element1.submit();
+            Thread.sleep(2000);
+            List<WebElement> list = driver.findElements(By.xpath("//div[@class='body ']"));
+            list.forEach(item -> {
+
+                String str = item.getText();
+                System.out.println(str);
+                Assert.assertTrue(str.contains(text));});
 
         }
         // удалить запись

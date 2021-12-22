@@ -6,6 +6,9 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LoginPageTest {
     WebDriver driver;
     LoginPage loginPage;
@@ -30,31 +33,59 @@ public class LoginPageTest {
        loginPage.click(loginButton);
    }
     @Test
-    public void NewsTest(){
+    public void NewsTest() {
+        String startHandle = driver.getWindowHandle();
+        List<WebElement> newList = driver.findElements(By.xpath("//div[@class='blog-article']//a"));
+        newList.forEach(item -> {
 
-        WebElement News1 = driver.findElement(By.xpath("//*[@id=\"blog-articles\"]/div[1]/a"));
-       News1.click();
-       Assert.assertEquals(News1.getText(), "Eating your own dog food");
-        WebElement News2 = driver.findElement(By.xpath("//*[@id=\"blog-articles\"]/div[2]/a"));
-        News2.click();
-        Assert.assertEquals(News2.getText(), "5 ideas how to use coloured tags");
-        WebElement News3 = driver.findElement(By.xpath("//*[@id=\"blog-articles\"]/div[3]/a"));
-        News3.click();
-        Assert.assertEquals(News3.getText(), "New: Timestamp function");
-        WebElement News4 = driver.findElement(By.xpath("//*[@id=\"blog-articles\"]/div[4]/a"));
-        News4.click();
-        Assert.assertEquals(News4.getText(), "Why you must never forget your monkkee password!!");
-        WebElement News5 = driver.findElement(By.xpath("//*[@id=\"blog-articles\"]/div[5]/a"));
-        News5.click();
-        Assert.assertEquals(News5.getText(), "Why monkkee won’t launch an app in the near future");
+            String str = item.getText();
+            System.out.println(str);
+
+            item.click();
+           // try {
+            //    Thread.sleep(3000);
+          //  } catch (InterruptedException e) {
+          //      e.printStackTrace();
+          //  }
+            ArrayList<String> handles = new ArrayList<>(driver.getWindowHandles());
+            String lastHandle = handles.get(1);
+            driver.switchTo().window(lastHandle);
+            System.out.println(driver.getCurrentUrl());
+            WebElement title = driver.findElement(By.xpath("//div[@class='post-title']//h1"));
+            String o = title.getText();
+            System.out.println(o);
+            Assert.assertEquals(o, str);
+            driver.close();
+            driver.switchTo().window(startHandle);
+
+        });
     }
+
+
     @Test
     public void SeachTest() {
         driver.get("https://www.monkkee.com/en/blog/");
-        WebElement element1 = driver.findElement(By.name("//*[@id=\"blog\"]/div/div/div[2]/div[1]"));
-        element1.sendKeys("Why monkkee won’t launch an app in the near future");
+        String text = "a321cbf8-7ac1-45a6-b804-0916195185b1";
+        WebElement element1 = driver.findElement(By.xpath("//*[@id=\"blog\"]/div/div/div[2]/div[1]"));
+        element1.sendKeys(text);
                element1.submit();
+        List<WebElement> list = driver.findElements(By.xpath("//div[@class='body ']"));
+        list.forEach(item -> {
+
+            String str = item.getText();
+            System.out.println(str);
+            Assert.assertTrue(str.contains(text));});
+
 
     }
+    @Test //ссылки из футера
+    public void footerLinksTest() throws InterruptedException {
+        List<WebElement> footerList = driver.findElements(By.xpath("//li[@class='footer-menu-item']"));
+        footerList.forEach(item ->
+                System.out.println(item.getText()));
+        footerList.forEach(WebElement::click);
+
+    }
+
 }
 
