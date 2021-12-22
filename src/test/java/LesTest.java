@@ -92,22 +92,6 @@ public class LesTest {
     }
 
 
-    @Test
-    public void first6() {
-        WebDriver driver = new ChromeDriver();
-        // А теперь для того, чтобы открыть Google.
-        driver.get("http://www.google.com");
-        // Найти элемент ввода по его имени.
-        WebElement element =
-                driver.findElement(By.name("q"));
-        // Вводим что-то для поиска.
-        element.sendKeys("Сергей Рижкович");
-        // Нажимаем кнопку отправки.
-        element.submit();
-        // Проверяем заголовок страницы.
-        System.out.println("Page title is: " +
-                driver.getTitle());
-    }
 }
 
 
