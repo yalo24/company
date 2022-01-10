@@ -11,6 +11,14 @@ import java.util.Random;
 
 public class LesTest {
 
+
+
+    private static void accept(WebElement item) {
+        String str = item.getText();
+        System.out.println(str);
+        item.click();
+    }
+
     @Test
     public void first() {
         System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
@@ -42,13 +50,18 @@ public class LesTest {
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get("https://onliner.by/");
-        WebElement element3 = driver.findElement(By.xpath("//*[@id=\"container\"]/div/div/header/div[2]/div/nav/ul[1]/li[1]/a[2]/span"));
+        WebElement element3 = driver.findElement(By.xpath("//*[@id=\"container\"]/div/div/header/div[2]/div/nav/ul[1]/li[3]/a[2]"));
         element3.click();
-        List<WebElement> list = driver.findElements(By.xpath("//*[@id=\"container\"]/div/div/div/div/div[1]/ul"));
-        list.forEach(item ->
-                System.out.println(item.getText()));
+        WebElement element4 = driver.findElement(By.xpath("//*[@id=\"container\"]/div/div/div/div/div/div[2]/div/div/div[3]/div/div[2]/div[2]/div[2]/div[2]/div/div[2]/div[1]/div/div/div[1]"));
+        element4.click();
+        WebElement element5 = driver.findElement(By.xpath("//*[@id=\"container\"]/div/div/div/div/div/div[2]/div/div/div[3]/div/div[2]/div[2]/div[2]/div[2]/div/div[2]/div[1]/div/div/div[1]/div/div[2]/div[2]/div/div[2]/ul/li[7]/label"));
+        element5.click();
+        List<WebElement> newList = driver.findElements(By.xpath("//ul[@class='vehicle-form_offers']/div[3]/div/a"));
+            System.out.println(newList.size());
+      System.out.println(newList.get(12));
 
-    }
+        }
+
 
     @Test
     public void first4() {
