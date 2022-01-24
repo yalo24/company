@@ -1,6 +1,7 @@
 
 
 import io.restassured.http.ContentType;
+import org.asynchttpclient.Response;
 import org.asynchttpclient.util.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -44,13 +45,15 @@ public class APITest {
 
     @Test
     public void first2() {
-        Root root = given()
+        /*Root root =*/
+         given()
                 .contentType(ContentType.JSON) //устанавливаем тип контента джейсон
                 .when()//после него ключевые запросы
-                .get("https://reqres.in/api/users/2") //SINGLE USER
-                .as(Root.class);
-        System.out.println(root.page);
-        System.out.println(root.support.text);
+                .get("https://reqres.in/api/users/2")
+    .then().statusCode(200);//SINGLE USER
+                //.as(Root.class);
+        //System.out.println(root.page);
+        //System.out.println(root.support.text);
 
     }
 
@@ -96,13 +99,27 @@ public class APITest {
 
     @Test
     public void first6() {
-        Root3 root3 = (Root3) given()
+        Root3 root3= given()
                 .contentType(ContentType.JSON) //устанавливаем тип контента джейсон
-                .baseUri("https://reqres.in/api/users") //пишем урл
-                .and()
-                .body(requestBody)
+                .baseUri("https://reqres.in") //пишем урл
+                .body(user)
                 .when()
-                .post("https://reqres.in/api/users")
+                .post("api/users")
+                .body()
+                .as(Root3.class);
+
+        System.out.println(root3.name);
+
+    }
+    @Test
+    public void first7() {
+        Root3 root3= given()
+                .contentType(ContentType.JSON) //устанавливаем тип контента джейсон
+                .baseUri("https://reqres.in") //пишем урл
+                .body(user)
+                .when()
+                .post("api/users")
+                .body()
                 .as(Root3.class);
 
         System.out.println(root3.name);

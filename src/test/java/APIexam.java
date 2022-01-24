@@ -1,27 +1,31 @@
 import io.restassured.http.ContentType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
 
 public class APIexam {
-  Root4 pet1= new Root4(2122, "Fit", "КПир", "egf", null, null, null, 12);
+  Root4 pet1= new Root4(0, "ssd", "ssss", "sss", null, null, null, 0);
+
+  Root4 [] array = new Root4[]{pet1};
 
 
     @Test
     public void first(){
 
-        Root4 root4 = given()
+        Root5 root5 = given()
                 .contentType(ContentType.JSON) //устанавливаем тип контента джейсон
-                .baseUri("petstore.swagger.io/v2") //пишем урл
-                .body(pet1)
+                .baseUri("https://petstore.swagger.io/v2") //пишем урл
+                .body(array)
                 .when()//после него ключевые запросы
-                .post("user/")
+                .post("/user/createWithArray")
+                .as(Root5.class);
 
-                .as(Root4.class);
-
-        System.out.println(root4.firstName);
+        System.out.println(root5.code+" "+root5.message);
+        Assert.assertEquals(root5.code, 200);
+        Assert.assertEquals(root5.message, "ok");
 
 
     }

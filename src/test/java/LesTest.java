@@ -12,7 +12,6 @@ import java.util.Random;
 public class LesTest {
 
 
-
     private static void accept(WebElement item) {
         String str = item.getText();
         System.out.println(str);
@@ -44,8 +43,8 @@ public class LesTest {
         Assert.assertEquals(Ops2.getText(), "Option 2");
     }
 
-    @Test
-    public void first3() {
+  /*  @Test
+    public void first3() throws InterruptedException {
         System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -56,12 +55,35 @@ public class LesTest {
         element4.click();
         WebElement element5 = driver.findElement(By.xpath("//*[@id=\"container\"]/div/div/div/div/div/div[2]/div/div/div[3]/div/div[2]/div[2]/div[2]/div[2]/div/div[2]/div[1]/div/div/div[1]/div/div[2]/div[2]/div/div[2]/ul/li[7]/label"));
         element5.click();
-        List<WebElement> newList = driver.findElements(By.xpath("//ul[@class='vehicle-form_offers']/div[3]/div/a"));
-            System.out.println(newList.size());
-      System.out.println(newList.get(12));
+        Thread.sleep(3000);
+        List<WebElement> newList = driver.findElements(By.xpath("//a[@class='vehicle-form__offers-unit']"));
 
-        }
+        System.out.println(newList.size());
+      System.out.println(newList.get(31).getAttribute("href"));
+      newList.get(31).click();
 
+        }*/
+
+    @Test
+    public void first3() throws InterruptedException {
+        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("https://onliner.by/");
+        WebElement element3 = driver.findElement(By.xpath("///div[@class='btn-group'][1]"));
+        element3.click();
+        WebElement element4 = driver.findElement(By.xpath("(//div[@class='input-style__real'])[4]"));
+        element4.click();
+        WebElement element5 = driver.findElement(By.xpath("//*[@id=\"container\"]/div/div/div/div/div/div[2]/div/div/div[3]/div/div[2]/div[2]/div[2]/div[2]/div/div[2]/div[1]/div/div/div[1]/div/div[2]/div[2]/div/div[2]/ul/li[7]/label"));
+        element5.click();
+        Thread.sleep(3000);
+        List<WebElement> newList = driver.findElements(By.xpath("//a[@class='vehicle-form__offers-unit']"));
+
+        System.out.println(newList.size());
+        System.out.println(newList.get(31).getAttribute("href"));
+        newList.get(31).click();
+
+    }
 
     @Test
     public void first4() {
@@ -104,7 +126,27 @@ public class LesTest {
         return length;
     }
 
+    @Test
+    public void firstYa() throws InterruptedException {
+        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("https://yandex.by/");
+        WebElement elementY1 = driver.findElement(By.xpath("(//div[@class='services-new__icon'])[5]"));
+        elementY1.click();
 
+       WebElement elementY2 = driver.findElement(By.xpath("//div[@data-zone-name='thematic-entrypoint']"));
+        elementY2.click();
+       /* WebElement element5 = driver.findElement(By.xpath("//*[@id=\"container\"]/div/div/div/div/div/div[2]/div/div/div[3]/div/div[2]/div[2]/div[2]/div[2]/div/div[2]/div[1]/div/div/div[1]/div/div[2]/div[2]/div/div[2]/ul/li[7]/label"));
+        element5.click();
+        Thread.sleep(3000);
+        List<WebElement> newList = driver.findElements(By.xpath("//a[@class='vehicle-form__offers-unit']"));
+
+        System.out.println(newList.size());
+        System.out.println(newList.get(31).getAttribute("href"));
+        newList.get(31).click();*/
+
+    }
 }
 
 
